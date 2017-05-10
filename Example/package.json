@@ -1,0 +1,24 @@
+{
+  "name": "wpf-sys-menu-demo",
+  "version": "0.0.1",
+  "scripts": {
+    "start": "react-native start",
+    "test": "jest"
+  },
+  "dependencies": {
+	"@bluejeans/react-native-wpf-sysmenu": "file:../",
+	"react": "16.0.0-alpha.6",
+    "react-native": "^0.43.2",
+    "react-native-windows": "^0.43.0-rc.0"
+  },
+  "devDependencies": {
+    "babel-jest": "20.0.0",
+    "babel-preset-react-native": "1.9.1",
+    "jest": "20.0.0",
+    "react-test-renderer": "16.0.0-alpha.6",
+    "rnpm-plugin-windows": "^0.2.4"
+  },
+  "jest": {
+    "preset": "react-native"
+  }
+}
