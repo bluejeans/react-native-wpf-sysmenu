@@ -7,8 +7,8 @@
     <ProjectGuid>{7AB3A24A-D5D9-479F-8E12-22213DD40D3F}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Playground.Net46</RootNamespace>
-    <AssemblyName>Playground.Net46</AssemblyName>
+    <RootNamespace>WpfSysMenuDemo</RootNamespace>
+    <AssemblyName>WpfSysMenuDemo</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -160,6 +160,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\windows\WpfSysMenu\WpfSysMenu.csproj">
+      <Project>{fd8f2869-95f4-47e4-9467-439d27806f34}</Project>
+      <Name>WpfSysMenu</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\node_modules\react-native-windows\ReactWindows\ReactNative.Net46\ReactNative.Net46.csproj">
       <Project>{22cbff9c-fe36-43e8-a246-266c7635e662}</Project>
       <Name>ReactNative.Net46</Name>

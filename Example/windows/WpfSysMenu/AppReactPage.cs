@@ -1,8 +1,8 @@
 ﻿using ReactNative;
 using ReactNative.Modules.Core;
 using ReactNative.Shell;
-using System;
 using System.Collections.Generic;
+using WpfSysMenu;
 
 namespace WpfSysMenuDemo
 {
@@ -18,6 +18,7 @@ namespace WpfSysMenuDemo
 
         public override List<IReactPackage> Packages => new List<IReactPackage>
         {
+            new WpfSusMenuPackage(),
             new MainReactPackage(),
         };
 
