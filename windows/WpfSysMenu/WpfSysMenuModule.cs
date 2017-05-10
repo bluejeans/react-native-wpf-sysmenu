@@ -4,6 +4,7 @@ namespace WpfSysMenu
 {
     public sealed class WpfSysMenuModule : ReactContextNativeModuleBase, ILifecycleEventListener
     {
+        SysMenuHelper _menu = new SysMenuHelper();
         public WpfSysMenuModule(ReactContext reactContext)
             : base(reactContext)
         {
@@ -31,10 +32,14 @@ namespace WpfSysMenu
         #region ILifecycleEventListener Members
         public void OnDestroy()
         {
+            //here will remove items
+            _menu.RemoveMenu();
         }
 
         public void OnResume()
         {
+            //here will add menu items
+            _menu.AddMenu();
         }
 
         public void OnSuspend()

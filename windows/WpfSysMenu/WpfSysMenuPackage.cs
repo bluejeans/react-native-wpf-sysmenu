@@ -24,7 +24,7 @@ namespace WpfSysMenu
 
         public IReadOnlyList<IViewManager> CreateViewManagers(ReactContext reactContext)
         {
-            return new List<IViewManager>(0); //TODO: check for place to initialize menu
+            return new List<IViewManager>(0); 
         }
         #endregion
     }
