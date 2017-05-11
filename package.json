@@ -3,5 +3,35 @@
   "version": "0.0.1",
   "description": "An extension of the Windows system menu with custom items.",
   "private": true,
-  "main": "react-native-wpf-sysmenu.js"
+  "main": "react-native-wpf-sysmenu.js",
+  "scripts": {
+    "lint": "standard \"*.js\" && standard \"__tests__/**/*.js\" && standard \"__mocks__/**/*.js\"",
+    "lint:fix": "standard --fix \"*.js\" && standard --fix \"__tests__/**/*.js\" && standard --fix \"__mocks__/**/*.js\""
+  },
+  "devDependencies": {
+    "babel-eslint": "^7.2.3",
+    "eslint": "^3.19.0",
+    "eslint-plugin-react": "^6.9.0",
+    "standard": "^10.0.0"
+  },
+  "standard": {
+    "parser": "babel-eslint",
+    "globals": [
+      "describe",
+      "it",
+      "xit",
+      "fetch",
+      "navigator",
+      "__DEV__",
+      "XMLHttpRequest",
+      "FormData",
+      "React$Element",
+      "WebSocket",
+      "jest",
+      "expect",
+      "ErrorUtils",
+      "beforeEach",
+      "afterEach"
+    ]
+  }
 }

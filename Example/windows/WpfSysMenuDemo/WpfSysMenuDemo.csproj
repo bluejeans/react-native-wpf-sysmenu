@@ -141,10 +141,6 @@
       <Project>{22cbff9c-fe36-43e8-a246-266c7635e662}</Project>
       <Name>ReactNative.Net46</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ReactNative.Net46\ReactNative.Net46.csproj">
-      <Project>{22cbff9c-fe36-43e8-a246-266c7635e662}</Project>
-      <Name>ReactNative.Net46</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup Condition="'$(Configuration)' == 'ReleaseBundle' or '$(Configuration)' == 'DebugBundle'">
     <Content Include="ReactAssets\**\*">

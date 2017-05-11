@@ -6,12 +6,15 @@
 
 import React, { Component } from 'react';
 import {
+  Alert,
   AppRegistry,
   StyleSheet,
   Text,
   View
 } from 'react-native';
 
+import Menu from '@bluejeans/react-native-wpf-sysmenu'
+import RCTDeviceEventEmitter from 'RCTDeviceEventEmitter'
 
 class WpfSysMenu extends Component {
   render() {
@@ -57,3 +60,14 @@ const styles = StyleSheet.create({
 });
 
 AppRegistry.registerComponent('SysMenu', () => WpfSysMenu);
+
+const menu = Menu.create();
+
+menu.addSeparator()
+  .then(() => menu.addItem(1, "Test Item 1"))
+  .then(() => menu.addItem(2, "Test Item 2"))
+  .then(() => menu.addItem(3, "Test Item 3"))
+  .then(() => menu.enableItem(2, false))
+  .catch((e) => Alert.alert('Error', e.message))
+
+RCTDeviceEventEmitter.addListener('SystemMenuItemClicked', (id) => Alert.alert('SysMenu', `Menu Item ${id} is clicked`))

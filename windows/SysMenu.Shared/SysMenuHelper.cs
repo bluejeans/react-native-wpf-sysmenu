@@ -1,37 +1,61 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WpfSysMenu
 {
     class SysMenuHelper
     {
-        const int _SettingsSysMenuID = 10001;
-        const int _AboutSysMenuID = 10002;
+        const int START_MENU_INDEX = 5;
+
+        int _index = START_MENU_INDEX; //start index for add items in system menu
+        bool _isMenuRegistered = false;
 
         ISysMenuItem _menuItem = new SysMenuItem();
 
-        internal void AddMenu()
+        public event EventHandler<int> ItemClicked;
+
+        public void AddSeparator()
         {
-            /// Create our new System Menu items just before the Close menu item
-
-            _menuItem.AddSeparator(5);
-            _menuItem.AddItem(6, _SettingsSysMenuID, "Settings...");
-            _menuItem.AddItem(7, _AboutSysMenuID, "About...");
-
-            _menuItem.RegisterHandler();
+            _menuItem.AddSeparator(_index++);
         }
 
-        internal void RemoveMenu()
+        public void AddItem(int id, string name)
         {
+            if (!_menuItem.AddItem(_index, id, name))
+            {
+                throw new InvalidOperationException($"Menu Item {id}:[{name}] cannot be added");
+            }
+
+            ++_index;
+
+            if (!_isMenuRegistered)
+            {
+                _menuItem.RegisterHandler();
+                _menuItem.ItemClicked += _menuItem_ItemClicked;
+                _isMenuRegistered = true;
+            }
+        }
+
+        public void EnableItem(int id, bool enable)
+        {
+            _menuItem.EnableItem(id, false);
+        }
+
+        public void RemoveAll()
+        {
+            _menuItem.ItemClicked -= _menuItem_ItemClicked;
+            _isMenuRegistered = false;
             _menuItem.UnregisterHandler();
 
-            _menuItem.RemoveItem(7);
-            _menuItem.RemoveItem(6);
-            _menuItem.RemoveItem(5);
+            for (; _index > START_MENU_INDEX; _index--)
+            {
+                _menuItem.RemoveItem(_index);
+            }
         }
 
+        private void _menuItem_ItemClicked(object sender, int id)
+        {
+            ItemClicked?.Invoke(this, id);
+        }
     }
 }
