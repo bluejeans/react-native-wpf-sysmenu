@@ -14,7 +14,6 @@ import {
 } from 'react-native';
 
 import Menu from '@bluejeans/react-native-wpf-sysmenu'
-import RCTDeviceEventEmitter from 'RCTDeviceEventEmitter'
 
 class WpfSysMenu extends Component {
   render() {
@@ -69,5 +68,3 @@ menu.addSeparator()
   .then(() => menu.addItem(3, "Test Item 3"))
   .then(() => menu.enableItem(2, false))
   .catch((e) => Alert.alert('Error', e.message))
-
-RCTDeviceEventEmitter.addListener('SystemMenuItemClicked', (id) => Alert.alert('SysMenu', `Menu Item ${id} is clicked`))
