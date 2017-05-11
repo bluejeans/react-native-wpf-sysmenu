@@ -56,4 +56,4 @@ const styles = StyleSheet.create({
   },
 });
 
-AppRegistry.registerComponent('WpfSysMenu', () => WpfSysMenu);
+AppRegistry.registerComponent('SysMenu', () => WpfSysMenu);

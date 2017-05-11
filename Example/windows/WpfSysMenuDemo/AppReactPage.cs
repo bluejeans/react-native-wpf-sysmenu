@@ -8,7 +8,7 @@ namespace WpfSysMenuDemo
 {
     internal class AppReactPage : ReactPage
     {
-        public override string MainComponentName => "WpfSysMenu";
+        public override string MainComponentName => "SysMenu";
 
         public override string JavaScriptMainModuleName => "index.windows";
 

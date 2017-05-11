@@ -5,7 +5,7 @@ using System.Windows.Interop;
 
 namespace WpfSysMenu
 {
-    class SysMenuHelper
+    class SysMenuItem : ISysMenuItem
     {
         #region Win32 API Stuff
         // Define the Win32 API methods we are going to use
@@ -25,33 +25,20 @@ namespace WpfSysMenu
         public const Int32 MF_STRING = 0x0;
         #endregion
 
-        // The constants we'll use to identify our custom system menu items
-        public const Int32 _SettingsSysMenuID = 1000;
-        public const Int32 _AboutSysMenuID = 1001;
-        /// <summary>
-        /// This is the Win32 Interop Handle for this Window
-        /// </summary>
-        public IntPtr Handle
+        public SysMenuItem()
         {
-            get
-            {
-                return new WindowInteropHelper(Application.Current.MainWindow).Handle;
-            }
+            _systemMenuHandle = GetSystemMenu(this.Handle, false);
         }
 
+        IntPtr Handle => new WindowInteropHelper(Application.Current.MainWindow).Handle;
         HwndSourceHook _hook;
+        IntPtr _systemMenuHandle;
 
-        internal void AddMenu()
+
+        public void RegisterHandler()
         {
-            /// Get the Handle for the Forms System Menu
-            IntPtr systemMenuHandle = GetSystemMenu(this.Handle, false);
-            /// Create our new System Menu items just before the Close menu item
-            InsertMenu(systemMenuHandle, 5, MF_BYPOSITION | MF_SEPARATOR, 0, string.Empty); // <-- Add a menu seperator
-            InsertMenu(systemMenuHandle, 6, MF_BYPOSITION, _SettingsSysMenuID, "Settings...");
-            InsertMenu(systemMenuHandle, 7, MF_BYPOSITION, _AboutSysMenuID, "About...");
-            
             // Attach our WndProc handler to this Window
-            var source = HwndSource.FromHwnd(this.Handle);
+            var source = HwndSource.FromHwnd(this.Handle);
             if (_hook != null)
             {
                 source.RemoveHook(_hook);
@@ -61,7 +48,7 @@ namespace WpfSysMenu
 
         }
 
-        internal void RemoveMenu()
+        public void UnregisterHandler()
         {
             if (_hook == null)
             {
@@ -71,14 +58,6 @@ namespace WpfSysMenu
             var source = HwndSource.FromHwnd(this.Handle);
             source.RemoveHook(_hook);
             _hook = null;
-
-            /// Get the Handle for the Forms System Menu
-            IntPtr systemMenuHandle = GetSystemMenu(this.Handle, false);
-            /// Create our new System Menu items just before the Close menu item
-            DeleteMenu(systemMenuHandle, 7, MF_BYPOSITION);
-            DeleteMenu(systemMenuHandle, 6, MF_BYPOSITION);
-            DeleteMenu(systemMenuHandle, 5, MF_BYPOSITION); // <-- Add a menu seperator
-
         }
 
         private static IntPtr WndProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
@@ -89,17 +68,32 @@ namespace WpfSysMenu
                 // Execute the appropriate code for the System Menu item that was clicked
                 switch (wParam.ToInt32())
                 {
-                    case _SettingsSysMenuID:
+                    case 10001:
                         MessageBox.Show("\"Settings\" was clicked");
                         handled = true;
                         break;
-                    case _AboutSysMenuID:
+                    case 10002:
                         MessageBox.Show("\"About\" was clicked");
                         handled = true;
                         break;
                 }
             }
             return IntPtr.Zero;
+        }
+
+        public bool AddItem(int index, int id, string name)
+        {
+            return InsertMenu(_systemMenuHandle, index, MF_BYPOSITION, id, name);
+        }
+
+        public bool AddSeparator(int index)
+        {
+            return InsertMenu(_systemMenuHandle, index, MF_BYPOSITION | MF_SEPARATOR, 0, string.Empty);
+        }
+
+        public bool RemoveItem(int index)
+        {
+            return DeleteMenu(_systemMenuHandle, index, MF_BYPOSITION);
         }
     }
 }
