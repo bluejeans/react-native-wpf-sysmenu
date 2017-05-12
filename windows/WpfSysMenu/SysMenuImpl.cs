@@ -97,9 +97,23 @@ namespace WpfSysMenu
                 throw new InvalidOperationException("Menu has not been created yet");
             }
 
+            if (Application.Current == null)
+            {
+                _hook = null;
+                return;
+            }
+
             Application.Current.Dispatcher.Invoke(() =>
             {
                 WndProcFired -= SysMenuItem_WndProcFired;
+
+                var mainWindow = Application.Current.MainWindow;
+                if (mainWindow == null)
+                {
+                    _hook = null;
+                    return;
+                }
+
                 var source = HwndSource.FromHwnd(this.Handle);
                 source.RemoveHook(_hook);
                 _hook = null;

@@ -43,6 +43,7 @@ namespace WpfSysMenu
 
         public void RemoveAll()
         {
+            if (!_isMenuRegistered) { return; }
             _menuItem.ItemClicked -= _menuItem_ItemClicked;
             _isMenuRegistered = false;
             _menuItem.UnregisterHandler();
