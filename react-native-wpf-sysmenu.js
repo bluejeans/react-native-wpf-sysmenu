@@ -1,16 +1,26 @@
 /* @flow */
-import { NativeModules, Alert } from 'react-native'
+import { NativeModules } from 'react-native'
 import RCTDeviceEventEmitter from '../../react-native/Libraries/EventEmitter/RCTDeviceEventEmitter'
 
 const _menu = NativeModules.WpfSysMenuComponent
 
 const create = () => {
-  const addSeparator = () => _menu.addSeparator()
-  const addItem = (id, name) => _menu.addItem(id, name)
-  const enableItem = (id, isEnabled) => _menu.enableItem(id, isEnabled)
-  const removeAll = () => _menu.removeAll()
+  let handlers = []
 
-  RCTDeviceEventEmitter.addListener('SystemMenuItemClicked', (id) => Alert.alert('SysMenu', `Menu Item ${id} is clicked`))
+  const addSeparator = () => _menu.addSeparator()
+  const addItem = (id, name, handler) => {
+    handlers.push({id, handler})
+    return _menu.addItem(id, name)
+  }
+  const enableItem = (id, isEnabled) => _menu.enableItem(id, isEnabled)
+  const removeAll = () => {
+    handlers = []
+    return _menu.removeAll()
+  }
+
+  RCTDeviceEventEmitter.addListener('SystemMenuItemClicked', (id) => handlers.forEach((i) => {
+    if (i.id === id && i.handler) { i.handler() }
+  }))
 
   return {
     addSeparator,

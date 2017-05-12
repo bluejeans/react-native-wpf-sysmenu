@@ -63,8 +63,8 @@ AppRegistry.registerComponent('SysMenu', () => WpfSysMenu);
 const menu = Menu.create();
 
 menu.addSeparator()
-  .then(() => menu.addItem(1, "Test Item 1"))
-  .then(() => menu.addItem(2, "Test Item 2"))
-  .then(() => menu.addItem(3, "Test Item 3"))
+  .then(() => menu.addItem(1, 'Test Item 1', () => Alert.alert('Clicked', 'Item 1')))
+  .then(() => menu.addItem(2, 'Test Item 2', () => Alert.alert('Clicked', 'Item 2')))
+  .then(() => menu.addItem(3, 'Test Item 3', () => Alert.alert('Clicked', 'Item 3')))
   .then(() => menu.enableItem(2, false))
   .catch((e) => Alert.alert('Error', e.message))
