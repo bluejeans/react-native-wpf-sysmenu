@@ -8,6 +8,10 @@
     "lint": "standard \"*.js\" && standard \"__tests__/**/*.js\" && standard \"__mocks__/**/*.js\"",
     "lint:fix": "standard --fix \"*.js\" && standard --fix \"__tests__/**/*.js\" && standard --fix \"__mocks__/**/*.js\""
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bluejeans/react-native-wpf-sysmenu"
+  },
   "devDependencies": {
     "babel-eslint": "^7.2.3",
     "eslint": "^3.19.0",
