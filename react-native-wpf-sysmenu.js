@@ -1,4 +1,3 @@
-/* @flow */
 import { NativeModules } from 'react-native'
 import RCTDeviceEventEmitter from '../../react-native/Libraries/EventEmitter/RCTDeviceEventEmitter'
 
