@@ -32,7 +32,7 @@ namespace UwpSysMenu
             {
                 return new List<IReactPackage>
                 {
-                    new WpfSusMenuPackage(),
+                    new WpfSysMenuPackage(),
                     new MainReactPackage(),
                 };
             }

@@ -6,7 +6,7 @@ using ReactNative.UIManager;
 
 namespace WpfSysMenu
 {
-    public sealed class WpfSusMenuPackage : IReactPackage
+    public sealed class WpfSysMenuPackage : IReactPackage
     {
         #region IReactPackage Members
         public IReadOnlyList<Type> CreateJavaScriptModulesConfig()

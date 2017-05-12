@@ -18,7 +18,7 @@ namespace WpfSysMenuDemo
 
         public override List<IReactPackage> Packages => new List<IReactPackage>
         {
-            new WpfSusMenuPackage(),
+            new WpfSysMenuPackage(),
             new MainReactPackage(),
         };
 
