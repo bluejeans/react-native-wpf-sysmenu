@@ -38,7 +38,7 @@ namespace WpfSysMenu
 
         public void EnableItem(int id, bool enable)
         {
-            _menuItem.EnableItem(id, false);
+            _menuItem.EnableItem(id, enable);
         }
 
         public void RemoveAll()

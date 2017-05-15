@@ -1,6 +1,6 @@
 {
   "name": "@bluejeans/react-native-wpf-sysmenu",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "An extension of the Windows system menu with custom items.",
   "private": false,
   "main": "react-native-wpf-sysmenu.js",
